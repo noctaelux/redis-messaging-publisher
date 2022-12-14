@@ -1,21 +1,17 @@
 package com.example.redismessagingpublisher.publishers;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.listener.ChannelTopic;
+import org.springframework.stereotype.Component;
 
+@Component
+@RequiredArgsConstructor
 public class RedisPublisher implements Publisher{
 
-    @Autowired
-    private RedisTemplate<String,Object> redisTemplate;
+    private final RedisTemplate<String,Object> redisTemplate;
 
-    @Autowired
-    private ChannelTopic channelTopic;
-
-    public RedisPublisher(RedisTemplate<String,Object> redisTemplate,ChannelTopic channelTopic){
-        this.redisTemplate = redisTemplate;
-        this.channelTopic = channelTopic;
-    }
+    private final ChannelTopic channelTopic;
 
     @Override
     public void publish(Object message) {
